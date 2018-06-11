@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/main.css">
+    <script src="../public/lib/jquery.js"></script>
+</head>
+
+<body>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">昵称</th>
+                <th scope="col">性别</th>
+                <th scope="col">邮箱</th>
+                <th scope="col">密码</th>
+                <th scope="col">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each userlist}}
+            <tr>
+                <td>
+                    <input type="hidden" name="_id" value={{$value._id}}>{{$value.nickname}}</td>
+                <td>{{$value.gender}}</td>
+                <td>{{$value.email}}</td>
+                <td>{{$value.password}}</td>
+                <td>
+                    <!-- <a href="javascript:deleteuser(this)"></a> -->
+                    <!-- <a href="">修改</a> -->
+                    <button type="button" class="btn btn-outline-danger">删除</button>
+                    <button type="button" class="btn btn-outline-info">修改</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script>
+        $(".btn-outline-danger").on("click", function (e) {
+            var tr = $(e.target).parents('tr');
+            var input = $(tr).find('td:eq(0)>input');
+            var id = input.val();
+            // $('post',{
+
+            // })
+            $.ajax({
+                url: "deleteuser",
+                // contentType: 'application/x-www-form-urlencoded',
+                type: "post",
+                data: {
+                    _id: id
+                },
+                // dataType:'json',
+                success: function (data) {
+                    if (data) {
+                        console.log("请求成功！");
+                        console.log(data);
+                    }
+                }
+            });
+            console.log(id);
+        });
+        $(".btn-outline-info").on("click", function (e) {
+            console.log($(e.target).html());
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>评论首页</title>
+    <link rel="stylesheet" href="../public/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/main.css">
+    <style type="text/css">
+        body > div.header.container > div > a > img {
+            height: 48px;
+            width: 48px;
+        }
+    </style>
+    <script src="../public/lib/jquery.js"></script>
+    <script>
+        function doCommit() {
+            window.location = 'comments';
+        }
+
+        function doLogin() {
+            window.location = 'login';
+        }
+
+        function doRegistion() {
+            window.location = 'register';
+        }
+
+        function rootPath() {
+            var curPageUrl = window.document.location.href;
+            var rootPath = curPageUrl.split("//")[0] + '//' +
+                curPageUrl.split("//")[1].split("/")[0] +
+                curPageUrl.split("//")[1].split("/")[1];
+            return rootPath;
+        }
+    </script>
+</head>
+
+<body>
+    
+
+    <div class="header container">
+        <div class="page-header">
+            <h1>
+                Example
+                <small>Subtext for header</small>
+            </h1>
+            <a href="comments" class="btn btn-success">发表留言</a>
+            <a class="border float-right" href="infoview">
+                    <img class="user-icon" src="/public/img/user.jpg" alt="">
+            </a>
+            <button type="button" class="btn btn-dark float-right" onclick="doCommit()">发起</button>
+            <button type="button" class="btn btn-dark float-right" onclick="doLogin()">登录</button>
+            <button type="button" class="btn btn-dark float-right" onclick="doRegistion()">注册</button>
+            
+            <!-- <ul class="nav navbar-nav navbar navbar-right">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>     
+            </ul> -->
+        </div>
+
+    </div>
+    <div class="comments container">
+        <ul class="list-group">
+            {{each comments}}
+            <li class="list-group-item">{{$value.date}}
+                <br> {{$value.name}}say:{{$value.message}}
+            </li>
+            {{/each}}
+
+
+        </ul>
+
+    </div>
+
+
+</body>
+
+</html>
